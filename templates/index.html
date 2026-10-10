@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Career Assistant</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+
+        <div class="logo">
+            AI Career Assistant
+        </div>
+
+        <ul class="nav-links">
+
+            <li><a href="/">Home</a></li>
+
+            <li><a href="/chat">AI Chat</a></li>
+
+            <li><a href="/about">About</a></li>
+
+            <li><a href="/resume">Resume Analyzer</a></li>
+
+            <li><a href="/dashboard">Dashboard</a></li>
+
+            <li><a href="/contact">Contact</a></li>
+
+        </ul>
+
+        <div class="buttons">
+
+            {% if session.get("user_id") %}
+
+                <a href="/logout" class="login-btn">
+                    Logout
+                </a>
+
+            {% else %}
+
+                <a href="/login" class="login-btn">
+                    Login
+                </a>
+
+                <a href="/signup" class="signup-btn">
+                    Sign Up
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- Hero Section -->
+
+    <section class="hero">
+
+        <div class="hero-left">
+
+            <h1>
+                Your Personal AI Career Assistant
+            </h1>
+
+            <p>
+                Get career guidance, resume assistance, interview preparation,
+                personalized roadmaps, and AI-powered support—all in one place.
+            </p>
+
+            <a href="/chat" class="start-btn">
+                Start Chatting
+            </a>
+
+        </div>
+
+        <div class="hero-right">
+
+            <div class="hero-card">
+
+                <h3>AI Career Assistant</h3>
+
+                <div class="chat-preview">
+
+                    <div class="ai-msg">
+                        👋 Hello! How can I help your career today?
+                    </div>
+
+                    <div class="user-msg">
+                        Help me become a Data Scientist.
+                    </div>
+
+                    <div class="ai-msg">
+                        I'll create a personalized roadmap for you...
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Features -->
+
+    <section class="features">
+
+        <h2>Everything You Need To Build Your Career</h2>
+
+        <p class="feature-subtitle">
+            Your AI-powered companion for career growth, interview preparation,
+            resume building, and personalized learning.
+        </p>
+
+        <div class="cards">
+
+            <a href="/chat" class="card-link">
+                <div class="card">
+                    <div class="icon">🎯</div>
+                    <h3>Career Guidance</h3>
+                    <p>Personalized career suggestions for every field.</p>
+                </div>
+            </a>
+
+            <a href="/resume" class="card-link">
+                <div class="card">
+                    <div class="icon">📄</div>
+                    <h3>Resume Analyzer</h3>
+                    <p>Analyze resumes and get ATS feedback.</p>
+                </div>
+            </a>
+
+            <a href="/chat" class="card-link">
+                <div class="card">
+                    <div class="icon">💼</div>
+                    <h3>Interview Prep</h3>
+                    <p>Practice AI-generated interview questions.</p>
+                </div>
+            </a>
+
+            <a href="/chat" class="card-link">
+                <div class="card">
+                    <div class="icon">🗺️</div>
+                    <h3>Learning Roadmaps</h3>
+                    <p>Step-by-step learning plans for your dream career.</p>
+                </div>
+            </a>
+
+            <a href="/chat" class="card-link">
+                <div class="card">
+                    <div class="icon">🤖</div>
+                    <h3>24×7 AI Assistant</h3>
+                    <p>Get instant answers anytime.</p>
+                </div>
+            </a>
+
+            <a href="/resume" class="card-link">
+                <div class="card">
+                    <div class="icon">📊</div>
+                    <h3>Skill Analysis</h3>
+                    <p>Discover your strengths and improve your weak areas.</p>
+                </div>
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        <p>
+            © 2026 AI Career Assistant | All Rights Reserved
+        </p>
+
+    </footer>
+
+</body>
+</html>

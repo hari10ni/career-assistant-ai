@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Career Assistant Chat</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+        <h2>AI Career Assistant</h2>
+
+        <a href="{{ url_for('main.home') }}">
+            <button class="sidebar-btn">
+                🏠 Home
+            </button>
+        </a>
+
+        <a href="{{ url_for('resume.resume_page') }}">
+            <button class="sidebar-btn">
+                📄 Resume Analyzer
+            </button>
+        </a>
+
+        <a href="{{ url_for('main.dashboard') }}">
+            <button class="sidebar-btn">
+                📊 Dashboard
+            </button>
+        </a>
+
+        <a href="{{ url_for('chat.new_chat') }}">
+            <button class="new-chat">
+                + New Chat
+            </button>
+        </a>
+
+        <div class="history">
+
+            {% for conversation in conversations %}
+
+                <a href="{{ url_for(
+                    'chat.open_conversation',
+                    conversation_id=conversation.id
+                ) }}">
+
+                    <p
+                    class="{% if conversation.id == active_conversation %}active-conversation{% endif %}">
+                        {{ conversation.title }}
+                    </p>
+
+                </a>
+
+            {% endfor %}
+
+        </div>
+
+        <div class="sidebar-footer">
+
+            <a href="{{ url_for('auth.logout') }}">
+                <button class="logout-btn">
+                    🚪 Logout
+                </button>
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- Main Chat Area -->
+    <div class="chat-area">
+
+        <div class="chat-header">
+            <h2>Welcome, {{ username }} 👋</h2>
+        </div>
+
+        <div class="messages" id="chat-box">
+
+            {% for chat in chats %}
+
+                <div class="user-message">
+                    {{ chat.user_message }}
+                </div>
+
+                <div class="bot-message markdown-content">
+                    {{ chat.ai_response | markdown | safe }}
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+        <div class="input-area">
+
+            <input
+                type="text"
+                id="message"
+                placeholder="Type your question here..."
+            >
+
+            <button id="send-btn">
+                Send
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+
+</body>
+</html>
