@@ -1,5 +1,7 @@
 from flask import Blueprint, render_template, request
 import os
+import tempfile
+from werkzeug.utils import secure_filename
 from services.resume_service import (
     extract_text_from_txt,
     extract_text_from_pdf,
@@ -10,7 +12,7 @@ from flask import session, redirect, url_for
 
 resume = Blueprint("resume", __name__)
 
-UPLOAD_FOLDER = "uploads"
+UPLOAD_FOLDER = "/tmp/uploads"
 
 
 @resume.route("/resume", methods=["GET", "POST"])
@@ -31,11 +33,11 @@ def resume_page():
 
         if file and file.filename:
 
-            filepath = os.path.join(
-                UPLOAD_FOLDER,
-                file.filename
-            )
+            os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
+            filename = secure_filename(file.filename)
+            filepath = os.path.join(UPLOAD_FOLDER, filename)
+            
             file.save(filepath)
 
             message = f"""
@@ -60,14 +62,7 @@ def resume_page():
                 resume_text = extract_text_from_docx(
                     filepath
                 )
-
-            if not resume_text.strip():
-
-                message = """
-        The uploaded resume appears to be empty.
-
-        Please upload a valid resume file.
-        """
+                
             if not resume_text.strip():
 
                 message = """
